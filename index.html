@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高山神社 - 赛博电子寺庙</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="shrine-background">
+        <div class="torii-overlay"></div>
+        <div class="mist-container" id="mistContainer"></div>
+        <div class="ember-container" id="emberContainer"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 顶栏：神社铭牌、下一殿按钮与功德状态 -->
+        <header class="shrine-header">
+            <div class="shrine-title-box">
+                <span class="torii-icon">⛩️</span>
+                <div class="title-text">
+                    <h1>高山神社</h1>
+                    <span class="subtitle">TAKAYAMA SHRINE</span>
+                </div>
+            </div>
+
+            <div class="header-center-nav">
+                <button id="nextHallHeaderBtn" class="btn-next-hall-standalone">
+                    <span>下一殿 ➔</span>
+                </button>
+            </div>
+
+            <div class="header-stats">
+                <div class="merit-badge">
+                    <span class="merit-icon">✨</span>
+                    <div class="merit-info">
+                        <span class="merit-label">当前功德</span>
+                        <span class="merit-value" id="meritCount">0</span>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <button id="soundToggleBtn" class="btn-icon" title="切换音效">
+                        <span id="soundIcon">🔊</span>
+                    </button>
+                    <button id="exportDataBtn" class="btn-secondary" title="导出备份">
+                        <span>📤 导出数据</span>
+                    </button>
+                    <button id="importDataBtn" class="btn-secondary" title="导入备份">
+                        <span>📥 导入数据</span>
+                    </button>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </header>
+
+        <!-- 视图区 -->
+        <main class="shrine-main">
+
+            <!-- 第一殿：本殿 (7:3 布局) -->
+            <section id="hall-main" class="tab-content active">
+                <div class="hall-split-container">
+                    
+                    <!-- 左侧 70%：敲木鱼 -->
+                    <div class="muyu-section">
+                        <div class="section-card muyu-card">
+                            <div class="card-header">
+                                <h2>敲木鱼积累功德</h2>
+                            </div>
+
+                            <div class="muyu-stage" id="muyuStage">
+                                <!-- 粒子飞词容器 -->
+                                <div class="muyu-particles-layer" id="muyuParticles"></div>
+
+                                <!-- 木锤与木鱼 SVG 组合 -->
+                                <div class="muyu-interactive-zone" id="muyuClickArea">
+                                    <div class="mallet-wrapper" id="mallet">
+                                        <svg viewBox="0 0 120 120" class="mallet-svg">
+                                            <defs>
+                                                <radialGradient id="headGrad" cx="35%" cy="35%" r="65%">
+                                                    <stop offset="0%" stop-color="#ff6b6b"/>
+                                                    <stop offset="60%" stop-color="#c82828"/>
+                                                    <stop offset="100%" stop-color="#5a0b0b"/>
+                                                </radialGradient>
+                                                <linearGradient id="handleGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                    <stop offset="0%" stop-color="#190a01"/>
+                                                    <stop offset="50%" stop-color="#3d1d06"/>
+                                                    <stop offset="100%" stop-color="#7a4115"/>
+                                                </linearGradient>
+                                                <linearGradient id="brassGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                    <stop offset="0%" stop-color="#8a6d1b"/>
+                                                    <stop offset="50%" stop-color="#d4af37"/>
+                                                    <stop offset="100%" stop-color="#ffe066"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M 32 88 L 102 18 Q 106 14 110 18 Q 114 22 110 26 L 40 96 Z" fill="url(#handleGrad)" stroke="#120601" stroke-width="1.5"/>
+                                            <path d="M 38 82 L 46 90 L 41 95 L 33 87 Z" fill="url(#brassGrad)" stroke="#5a450c" stroke-width="1"/>
+                                            <circle cx="26" cy="94" r="16" fill="url(#headGrad)" stroke="#801818" stroke-width="2"/>
+                                            <path d="M 15 90 Q 26 97 37 92" fill="none" stroke="rgba(255,230,200,0.6)" stroke-width="1.5"/>
+                                            <path d="M 18 99 Q 27 92 34 102" fill="none" stroke="rgba(255,230,200,0.6)" stroke-width="1.5"/>
+                                        </svg>
+                                    </div>
+                                    <div class="muyu-wrapper" id="muyuBody">
+                                        <svg viewBox="0 0 200 180" class="muyu-svg">
+                                            <defs>
+                                                <radialGradient id="muyuGrad" cx="40%" cy="40%" r="60%">
+                                                    <stop offset="0%" stop-color="#D4A359"/>
+                                                    <stop offset="50%" stop-color="#8B5A2B"/>
+                                                    <stop offset="100%" stop-color="#3D2314"/>
+                                                </radialGradient>
+                                            </defs>
+                                            <ellipse cx="100" cy="165" rx="75" ry="12" fill="rgba(0,0,0,0.5)"/>
+                                            <path d="M 30 110 C 20 60 60 20 110 20 C 160 20 185 60 180 110 C 175 150 130 165 100 165 C 60 165 35 145 30 110 Z" fill="url(#muyuGrad)" stroke="#2C160B" stroke-width="4"/>
+                                            <path d="M 60 50 Q 110 30 150 50" fill="none" stroke="#2C160B" stroke-width="3" stroke-linecap="round"/>
+                                            <path d="M 45 80 C 70 70 130 70 160 80" fill="none" stroke="#2C160B" stroke-width="3" stroke-linecap="round"/>
+                                            <circle cx="50" cy="115" r="8" fill="#1A0D07"/>
+                                            <path d="M 60 120 C 80 135 120 135 150 118" fill="none" stroke="#1A0D07" stroke-width="4" stroke-linecap="round"/>
+                                            <circle cx="100" cy="100" r="14" fill="none" stroke="#F5D061" stroke-width="2" opacity="0.6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="muyu-stats">
+                                    <span>今日已敲：<strong id="muyuHitCount">0</strong> 次</span>
+                                    <span>累计敲击功德：<strong id="muyuMeritTotal">0</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧 30%：长明灯奉纳阁 -->
+                    <div class="lamps-section">
+                        <div class="section-card lamps-card">
+                            <div class="card-header">
+                                <h2>长明灯 · 千日祈愿阁</h2>
+                                <p class="card-hint">每100功德+12小时 · 功德累加无上限 · 可续至365天万代长明</p>
+                            </div>
+
+                            <div class="lamps-container" id="lampsContainer">
+                                <!-- 动态渲染已供奉的长明灯 -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 第二殿：求签殿 (自由选择三大师，隐去明显人群标签) -->
+            <section id="hall-fortune" class="tab-content">
+                <div class="fortune-layout">
+                    <!-- 左侧：签筒摇签 -->
+                    <div class="section-card fortune-left">
+                        <div class="card-header card-header-flex">
+                            <div>
+                                <h2>第二殿：求签殿</h2>
+                                <p class="card-hint">消耗 <strong>500 功德</strong> · 摇动签筒求取天机灵签</p>
+                            </div>
+                            <button class="btn-secondary back-to-main-btn" data-tab="hall-main">
+                                <span>🔙 返回主殿</span>
+                            </button>
+                        </div>
+
+                        <div class="fortune-tube-stage">
+                            <div class="tube-wrapper" id="fortuneTube">
+                                <div class="sticks-in-tube">
+                                    <div class="stick-item s1"></div>
+                                    <div class="stick-item s2"></div>
+                                    <div class="stick-item s3"></div>
+                                    <div class="stick-item s4"></div>
+                                    <div class="stick-item s5"></div>
+                                </div>
+                                <div class="tube-body">
+                                    <span class="tube-seal">高山灵签</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 掉落的签 -->
+                            <div class="dropped-stick-container" id="droppedStickBox">
+                                <div class="dropped-stick" id="droppedStick">
+                                    <span class="stick-text" id="droppedStickText">点击摇签</span>
+                                </div>
+                            </div>
+
+                            <button id="drawFortuneBtn" class="btn-primary btn-gold btn-large">
+                                <span>🎋 虔诚摇签 (500功德)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：大师解签（无明显人群划分，让用户自由选择风格） -->
+                    <div class="section-card fortune-right">
+                        <div class="card-header">
+                            <h2>大师灵解</h2>
+                            <p class="card-hint" id="masterSelectHint">摇出灵签后，请随缘选择您心仪的大师为您指点迷津（单签锁定选定大师）</p>
+                        </div>
+
+                        <!-- 三位大师选择器：隐去显式人群分组，保留自然风格说明 -->
+                        <div class="masters-selector" id="mastersSelector">
+                            <div class="master-card master-senior" data-master="huiming">
+                                <div class="master-avatar">👴</div>
+                                <div class="master-info">
+                                    <span class="master-name">慧明法师</span>
+                                    <span class="master-tag">禅宗大德</span>
+                                    <span class="master-subdesc">慈悲观照 · 养心安康</span>
+                                </div>
+                            </div>
+                            <div class="master-card master-middle" data-master="xuanzhen">
+                                <div class="master-avatar">🧙‍♂️</div>
+                                <div class="master-info">
+                                    <span class="master-name">玄真道长</span>
+                                    <span class="master-tag">易理玄机</span>
+                                    <span class="master-subdesc">阴阳消长 · 事业决策</span>
+                                </div>
+                            </div>
+                            <div class="master-card master-youth" data-master="cyber">
+                                <div class="master-avatar">🤖</div>
+                                <div class="master-info">
+                                    <span class="master-name">赛博达摩</span>
+                                    <span class="master-tag">赛博机锋</span>
+                                    <span class="master-subdesc">AI算力 · 水逆退散</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 解签显示区域 -->
+                        <div class="fortune-result-box" id="fortuneResultBox">
+                            <div class="empty-result-notice">
+                                <span class="empty-icon">📜</span>
+                                <p>请在左侧摇签，摇出灵签后选择对应风格的大师指点迷津。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三殿：算命殿 -->
+            <section id="hall-bazi" class="tab-content">
+                <div class="bazi-layout">
+                    <!-- 左侧：生辰八字与祈测事项输入 -->
+                    <div class="section-card bazi-form-card">
+                        <div class="card-header card-header-flex">
+                            <div>
+                                <h2>第三殿：算命殿</h2>
+                                <p class="card-hint">消耗 <strong>1000 功德</strong> · 输入生辰八字与祈测事项</p>
+                            </div>
+                            <button class="btn-secondary back-to-main-btn" data-tab="hall-main">
+                                <span>🔙 返回主殿</span>
+                            </button>
+                        </div>
+
+                        <form id="baziForm" class="bazi-form">
+                            <div class="form-group">
+                                <label for="baziName">尊姓大名（可选）</label>
+                                <input type="text" id="baziName" placeholder="例如：张信徒" maxlength="12">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="baziTopic">🎯 祈测事项 / 所求之事（重点推算）</label>
+                                <input type="text" id="baziTopic" placeholder="例如：今年考研录取、事业跳槽升职、感情结婚、健康平顺..." maxlength="30">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="baziGender">性别</label>
+                                <select id="baziGender">
+                                    <option value="乾造(男)">乾造 (男)</option>
+                                    <option value="坤造(女)">坤造 (女)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="baziYear">出生年份 (公历)</label>
+                                    <input type="number" id="baziYear" min="1920" max="2030" value="1998" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="baziMonth">月份</label>
+                                    <select id="baziMonth"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="baziDay">日期</label>
+                                    <select id="baziDay"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="baziHour">出生时辰</label>
+                                <select id="baziHour">
+                                    <option value="0">子时 (23:00 - 01:00)</option>
+                                    <option value="2">丑时 (01:00 - 03:00)</option>
+                                    <option value="4">寅时 (03:00 - 05:00)</option>
+                                    <option value="6">卯时 (05:00 - 07:00)</option>
+                                    <option value="8">辰时 (07:00 - 09:00)</option>
+                                    <option value="10">巳时 (09:00 - 11:00)</option>
+                                    <option value="12">午时 (11:00 - 13:00)</option>
+                                    <option value="14">未时 (13:00 - 15:00)</option>
+                                    <option value="16">申时 (15:00 - 17:00)</option>
+                                    <option value="18">酉时 (17:00 - 19:00)</option>
+                                    <option value="20">戌时 (19:00 - 21:00)</option>
+                                    <option value="22">亥时 (21:00 - 23:00)</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-primary btn-crimson btn-large">
+                                <span>☯️ 开启命理测算 (1000功德)</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- 右侧：算命结果展示 -->
+                    <div class="section-card bazi-result-card">
+                        <div class="card-header">
+                            <h2>命理分析与神明灵符</h2>
+                            <p class="card-hint">天地五行 · 阴阳消长 · 祈测答疑</p>
+                        </div>
+
+                        <div id="baziResultDisplay" class="bazi-result-display">
+                            <div class="empty-result-notice">
+                                <span class="empty-icon">☯️</span>
+                                <p>请在左侧填写生辰与祈测事项，开启全方位的五行八字与所求解答。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 弹窗通知 -->
+    <div id="shrineToast" class="shrine-toast"></div>
+
+    <!-- 首次点灯 Modal -->
+    <div id="lampModal" class="modal-overlay">
+        <div class="modal-card modal-lamp-jp">
+            <h3>⛩️ 奉纳点灯 · 设立木札</h3>
+            <p class="modal-desc">消耗 100 功德点亮长明灯，可自由续照至 365 天无上限！</p>
+
+            <div class="form-group">
+                <label for="lampBlessingInput">祈愿词 (木札主文)</label>
+                <input type="text" id="lampBlessingInput" placeholder="例如：愿逢考必过、事业顺利、水逆退散" maxlength="20">
+            </div>
+
+            <div class="form-group">
+                <label for="lampDonorInput">奉纳人署名 (木札落款)</label>
+                <input type="text" id="lampDonorInput" placeholder="例如：张信徒 (留空则显示奉纳者)" maxlength="10">
+            </div>
+
+            <div class="modal-actions">
+                <button id="cancelLampBtn" class="btn-secondary">取消</button>
+                <button id="confirmLampBtn" class="btn-primary btn-gold">🔥 奉纳点灯 (100功德)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔥 续照/加时叠加 Modal -->
+    <div id="renewLampModal" class="modal-overlay">
+        <div class="modal-card modal-lamp-jp">
+            <h3>🔥 叠功德 · 加时护持</h3>
+            <p class="modal-desc" id="renewModalDesc">当前长明灯守护剩余：--，投入功德可无限追加庇佑时长！</p>
+
+            <div class="renew-preset-grid">
+                <button class="preset-btn" data-merit="100">
+                    <span class="preset-time">+12 小时</span>
+                    <span class="preset-cost">100 功德</span>
+                </button>
+                <button class="preset-btn" data-merit="600">
+                    <span class="preset-time">+3 天庇佑</span>
+                    <span class="preset-cost">600 功德</span>
+                </button>
+                <button class="preset-btn" data-merit="1400">
+                    <span class="preset-time">+7 天守护</span>
+                    <span class="preset-cost">1400 功德</span>
+                </button>
+                <button class="preset-btn active" data-merit="6000">
+                    <span class="preset-time">+30 天月相常耀</span>
+                    <span class="preset-cost">6000 功德</span>
+                </button>
+                <button class="preset-btn preset-year" data-merit="73000">
+                    <span class="preset-time">👑 365天 (1年恒照)</span>
+                    <span class="preset-cost">73,000 功德</span>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label for="customMeritInput">自定义追加功德 (每 100 功德 = +12 小时)</label>
+                <input type="number" id="customMeritInput" min="100" step="100" placeholder="例如: 500" value="100">
+            </div>
+
+            <div class="modal-actions">
+                <button id="cancelRenewBtn" class="btn-secondary">取消</button>
+                <button id="confirmRenewBtn" class="btn-primary btn-gold">✨ 注入功德 · 延展庇佑</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS 逻辑文件引入 -->
+    <script src="audio.js"></script>
+    <script src="muyu.js"></script>
+    <script src="lamps.js"></script>
+    <script src="fortune.js"></script>
+    <script src="bazi.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
