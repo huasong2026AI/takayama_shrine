@@ -59,8 +59,7 @@ class MuyuManager {
         this.muyuBody.classList.remove('knock-hit');
         this.mallet.classList.remove('swing');
 
-        void this.muyuBody.offsetWidth;
-        void this.mallet.offsetWidth;
+        void this.clickArea.offsetWidth;
 
         this.muyuBody.classList.add('knock-hit');
         this.mallet.classList.add('swing');
