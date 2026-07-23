@@ -447,7 +447,9 @@ body {
 
 .muyu-wrapper {
     transform-origin: 230px 165px;
-    transition: transform 0.05s ease;
+    transform-box: view-box;
+    -webkit-transform-origin: 230px 165px;
+    -webkit-transform-box: view-box;
 }
 
 .muyu-wrapper.knock-hit {
@@ -463,7 +465,9 @@ body {
 
 .mallet-wrapper {
     transform-origin: 108px 122px;
-    transition: transform 0.05s ease;
+    transform-box: view-box;
+    -webkit-transform-origin: 108px 122px;
+    -webkit-transform-box: view-box;
 }
 
 .mallet-wrapper.swing {
