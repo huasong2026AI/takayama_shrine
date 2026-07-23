@@ -439,65 +439,69 @@ body {
     transform: scale(0.97);
 }
 
-.muyu-monk-container {
+.muyu-cartoon-svg {
     width: 100%;
     height: 100%;
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
 }
 
-.muyu-monk-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.muyu-wrapper {
+    transform-origin: 230px 165px;
     transition: transform 0.05s ease;
 }
 
-.muyu-monk-container.knock-hit .muyu-monk-img {
-    animation: monkKnock 0.12s ease-in-out;
+.muyu-wrapper.knock-hit {
+    animation: muyuVibrate 0.12s ease-in-out;
 }
 
-@keyframes monkKnock {
-    0% { transform: scale(1) rotate(0deg); }
-    30% { transform: scale(0.97) rotate(-1deg) translateY(3px); }
-    70% { transform: scale(1.02) rotate(1deg) translateY(-1px); }
-    100% { transform: scale(1) rotate(0deg); }
+@keyframes muyuVibrate {
+    0% { transform: scale(1) translateY(0); }
+    30% { transform: scale(0.96) translateY(3px); }
+    70% { transform: scale(1.04) translateY(-1px); }
+    100% { transform: scale(1) translateY(0); }
 }
 
-.muyu-ripple {
-    position: absolute;
-    left: 70%;
-    top: 72%;
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(circle, rgba(245, 208, 97, 0.95) 0%, rgba(200, 40, 40, 0.6) 40%, transparent 100%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    pointer-events: none;
-    z-index: 6;
+.mallet-wrapper {
+    transform-origin: 108px 122px;
+    transition: transform 0.05s ease;
+}
+
+.mallet-wrapper.swing {
+    animation: malletSwing 0.14s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes malletSwing {
+    0% { transform: rotate(0deg); }
+    40% { transform: rotate(24deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.muyu-ripple-svg {
     opacity: 0;
+    pointer-events: none;
+    transform-origin: 203px 140px;
 }
 
-.muyu-ripple.swing {
-    animation: rippleEffect 0.28s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+.muyu-wrapper.knock-hit ~ .muyu-ripple-svg {
+    animation: svgRippleEffect 0.25s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
-@keyframes rippleEffect {
+@keyframes svgRippleEffect {
     0% {
-        transform: translate(-50%, -50%) scale(0.3);
+        r: 2px;
+        stroke-width: 4px;
         opacity: 1;
-        box-shadow: 0 0 15px rgba(245, 208, 97, 0.8);
+        stroke: #ffd59a;
     }
     50% {
+        stroke: #c82828;
         opacity: 0.8;
-        box-shadow: 0 0 30px rgba(200, 40, 40, 0.6);
     }
     100% {
-        transform: translate(-50%, -50%) scale(2.5);
+        r: 28px;
+        stroke-width: 1px;
         opacity: 0;
+        stroke: transparent;
     }
 }
 
