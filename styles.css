@@ -89,8 +89,21 @@ body {
 .shrine-title-box {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
     flex-shrink: 0;
+}
+
+.shrine-slogan {
+    font-family: var(--font-calligraphy);
+    font-size: 1.25rem;
+    color: var(--gold-primary);
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1.5px solid rgba(212, 175, 55, 0.4);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-shadow: 0 0 8px rgba(245, 208, 97, 0.3);
+    display: inline-block;
 }
 
 .torii-icon {
@@ -412,8 +425,8 @@ body {
 
 .muyu-interactive-zone {
     position: relative;
-    width: 220px;
-    height: 200px;
+    width: 300px;
+    height: 260px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -423,48 +436,69 @@ body {
 }
 
 .muyu-interactive-zone:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
 }
 
-.muyu-wrapper {
-    width: 185px;
-    height: 165px;
-    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.8));
+.muyu-monk-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.muyu-monk-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.05s ease;
 }
 
-.muyu-wrapper.knock-hit {
-    animation: muyuVibrate 0.12s ease-in-out;
+.muyu-monk-container.knock-hit .muyu-monk-img {
+    animation: monkKnock 0.12s ease-in-out;
 }
 
-@keyframes muyuVibrate {
-    0% { transform: scale(1) translateY(0); }
-    30% { transform: scale(0.95) translateY(4px); }
-    70% { transform: scale(1.03) translateY(-2px); }
-    100% { transform: scale(1) translateY(0); }
+@keyframes monkKnock {
+    0% { transform: scale(1) rotate(0deg); }
+    30% { transform: scale(0.97) rotate(-1deg) translateY(3px); }
+    70% { transform: scale(1.02) rotate(1deg) translateY(-1px); }
+    100% { transform: scale(1) rotate(0deg); }
 }
 
-.mallet-wrapper {
+.muyu-ripple {
     position: absolute;
-    top: -50px;
-    right: -25px;
-    width: 120px;
-    height: 120px;
-    transform-origin: 90% 15%;
-    transform: rotate(26deg);
+    left: 70%;
+    top: 72%;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(245, 208, 97, 0.95) 0%, rgba(200, 40, 40, 0.6) 40%, transparent 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
     pointer-events: none;
-    z-index: 5;
-    transition: transform 0.05s ease;
+    z-index: 6;
+    opacity: 0;
 }
 
-.mallet-wrapper.swing {
-    animation: malletSwing 0.14s cubic-bezier(0.2, 0.8, 0.2, 1);
+.muyu-ripple.swing {
+    animation: rippleEffect 0.28s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
-@keyframes malletSwing {
-    0% { transform: rotate(26deg) translate(0, 0); }
-    45% { transform: rotate(-25deg) translate(-32px, 36px); }
-    100% { transform: rotate(26deg) translate(0, 0); }
+@keyframes rippleEffect {
+    0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 1;
+        box-shadow: 0 0 15px rgba(245, 208, 97, 0.8);
+    }
+    50% {
+        opacity: 0.8;
+        box-shadow: 0 0 30px rgba(200, 40, 40, 0.6);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
 }
 
 .muyu-stats {
@@ -1289,7 +1323,22 @@ body {
 
     .shrine-title-box {
         width: 100%;
-        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .shrine-slogan {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        font-size: 1.05rem;
+        width: 100%;
+        text-align: center;
+        letter-spacing: 1px;
     }
 
     .title-text h1 {
@@ -1328,21 +1377,9 @@ body {
     }
 
     .muyu-interactive-zone {
-        width: 200px;
-        height: 180px;
+        width: 260px;
+        height: 220px;
         margin-top: 10px;
-    }
-
-    .muyu-wrapper {
-        width: 170px;
-        height: 150px;
-    }
-
-    .mallet-wrapper {
-        top: -45px;
-        right: -25px;
-        width: 110px;
-        height: 110px;
     }
 
     .fortune-layout {

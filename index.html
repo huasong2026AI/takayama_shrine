@@ -25,6 +25,7 @@
                     <h1>高山神社</h1>
                     <span class="subtitle">TAKAYAMA SHRINE</span>
                 </div>
+                <div class="shrine-slogan">积功德，来好运！</div>
             </div>
 
             <div class="header-center-nav">
@@ -75,51 +76,12 @@
                                 <!-- 粒子飞词容器 -->
                                 <div class="muyu-particles-layer" id="muyuParticles"></div>
 
-                                <!-- 木锤与木鱼 SVG 组合 -->
+                                <!-- 侧面敲木鱼动漫交互区 -->
                                 <div class="muyu-interactive-zone" id="muyuClickArea">
-                                    <div class="mallet-wrapper" id="mallet">
-                                        <svg viewBox="0 0 120 120" class="mallet-svg">
-                                            <defs>
-                                                <radialGradient id="headGrad" cx="35%" cy="35%" r="65%">
-                                                    <stop offset="0%" stop-color="#ff6b6b"/>
-                                                    <stop offset="60%" stop-color="#c82828"/>
-                                                    <stop offset="100%" stop-color="#5a0b0b"/>
-                                                </radialGradient>
-                                                <linearGradient id="handleGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                                    <stop offset="0%" stop-color="#190a01"/>
-                                                    <stop offset="50%" stop-color="#3d1d06"/>
-                                                    <stop offset="100%" stop-color="#7a4115"/>
-                                                </linearGradient>
-                                                <linearGradient id="brassGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                                    <stop offset="0%" stop-color="#8a6d1b"/>
-                                                    <stop offset="50%" stop-color="#d4af37"/>
-                                                    <stop offset="100%" stop-color="#ffe066"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <path d="M 32 88 L 102 18 Q 106 14 110 18 Q 114 22 110 26 L 40 96 Z" fill="url(#handleGrad)" stroke="#120601" stroke-width="1.5"/>
-                                            <path d="M 38 82 L 46 90 L 41 95 L 33 87 Z" fill="url(#brassGrad)" stroke="#5a450c" stroke-width="1"/>
-                                            <circle cx="26" cy="94" r="16" fill="url(#headGrad)" stroke="#801818" stroke-width="2"/>
-                                            <path d="M 15 90 Q 26 97 37 92" fill="none" stroke="rgba(255,230,200,0.6)" stroke-width="1.5"/>
-                                            <path d="M 18 99 Q 27 92 34 102" fill="none" stroke="rgba(255,230,200,0.6)" stroke-width="1.5"/>
-                                        </svg>
-                                    </div>
-                                    <div class="muyu-wrapper" id="muyuBody">
-                                        <svg viewBox="0 0 200 180" class="muyu-svg">
-                                            <defs>
-                                                <radialGradient id="muyuGrad" cx="40%" cy="40%" r="60%">
-                                                    <stop offset="0%" stop-color="#D4A359"/>
-                                                    <stop offset="50%" stop-color="#8B5A2B"/>
-                                                    <stop offset="100%" stop-color="#3D2314"/>
-                                                </radialGradient>
-                                            </defs>
-                                            <ellipse cx="100" cy="165" rx="75" ry="12" fill="rgba(0,0,0,0.5)"/>
-                                            <path d="M 30 110 C 20 60 60 20 110 20 C 160 20 185 60 180 110 C 175 150 130 165 100 165 C 60 165 35 145 30 110 Z" fill="url(#muyuGrad)" stroke="#2C160B" stroke-width="4"/>
-                                            <path d="M 60 50 Q 110 30 150 50" fill="none" stroke="#2C160B" stroke-width="3" stroke-linecap="round"/>
-                                            <path d="M 45 80 C 70 70 130 70 160 80" fill="none" stroke="#2C160B" stroke-width="3" stroke-linecap="round"/>
-                                            <circle cx="50" cy="115" r="8" fill="#1A0D07"/>
-                                            <path d="M 60 120 C 80 135 120 135 150 118" fill="none" stroke="#1A0D07" stroke-width="4" stroke-linecap="round"/>
-                                            <circle cx="100" cy="100" r="14" fill="none" stroke="#F5D061" stroke-width="2" opacity="0.6"/>
-                                        </svg>
+                                    <div class="muyu-monk-container" id="muyuBody">
+                                        <img src="muyu_monk_cartoon.jpg" alt="一休敲木鱼" class="muyu-monk-img">
+                                        <!-- 敲击波纹定位 -->
+                                        <div class="muyu-ripple" id="mallet"></div>
                                     </div>
                                 </div>
 

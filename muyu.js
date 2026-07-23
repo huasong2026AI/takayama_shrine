@@ -107,8 +107,8 @@ class MuyuManager {
         wordElem.style.setProperty('--tx', `${tx}px`);
         wordElem.style.setProperty('--ty', `${ty}px`);
 
-        wordElem.style.left = `calc(50% - 60px)`;
-        wordElem.style.top = `45%`;
+        wordElem.style.left = `calc(70% - 60px)`;
+        wordElem.style.top = `60%`;
 
         this.particlesLayer.appendChild(wordElem);
 
