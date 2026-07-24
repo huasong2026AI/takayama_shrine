@@ -1415,22 +1415,32 @@ body {
     }
 
     .masters-selector {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 
     .master-card {
-        padding: 8px 4px;
-        flex-direction: column;
-        text-align: center;
+        padding: 10px 14px;
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
     }
 
     .master-avatar {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+    }
+
+    .master-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
     }
 
     .master-name {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
     }
 
     .bazi-layout {
@@ -1440,6 +1450,35 @@ body {
 
     .bazi-form-card, .bazi-result-card {
         padding: 16px;
+    }
+
+    .bazi-pillars-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .muyu-stats {
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .bp-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+    }
+
+    .bp-details {
+        text-align: center !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .bazi-profile-header {
