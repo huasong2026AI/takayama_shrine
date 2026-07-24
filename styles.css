@@ -367,10 +367,34 @@ body {
     width: 100%;
 }
 
-.muyu-card, .lamps-card {
+/* 防止 Grid 子列撑开：Grid 子元素默认 min-width: auto 会导致内容撑破列宽 */
+.muyu-section,
+.lamps-section {
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.muyu-section .section-card,
+.lamps-section .section-card {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.muyu-card {
     height: 445px;
     display: flex;
     flex-direction: column;
+}
+
+.lamps-card {
+    display: flex;
+    flex-direction: column;
+    height: 445px;
+    min-height: 0;
 }
 
 .muyu-stage {
