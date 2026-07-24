@@ -668,13 +668,13 @@ body {
 }
 
 .fuda-text {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--gold-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
     display: block;
+    line-height: 1.35;
 }
 
 .fuda-footer {
