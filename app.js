@@ -45,6 +45,30 @@ class ShrineApp {
             });
         }
 
+        // 绑定鸟居彩蛋：快速点击鸟居 7 次，功德 +1000
+        const toriiIcon = document.querySelector('.torii-icon');
+        if (toriiIcon) {
+            let clickCount = 0;
+            let lastClickTime = 0;
+            toriiIcon.addEventListener('click', () => {
+                const now = Date.now();
+                if (now - lastClickTime > 2000) {
+                    clickCount = 0;
+                }
+                clickCount++;
+                lastClickTime = now;
+
+                if (clickCount >= 7) {
+                    this.addMerit(1000);
+                    this.showToast('⛩️ 触发神明感应：虔诚参拜鸟居，功德 +1000！');
+                    clickCount = 0;
+                    if (window.shrineAudio) {
+                        window.shrineAudio.playChimeSound();
+                    }
+                }
+            });
+        }
+
         this.initAtmosphere();
         this.updateUI();
         this.updateNextHallBtnLabel();
