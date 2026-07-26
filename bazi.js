@@ -1,7 +1,5 @@
 /* 高山神社 (Takayama Shrine) 第三殿：生辰八字算命、祈测事项解惑与电子灵符生成器 */
 
-// 闲鱼结缘手串商品链接配置 (商家可在此处自由替换为自己的闲鱼/微店宝贝链接)
-window.shrineXianyuLink = "https://2.taobao.com"; 
 
 class BaziCalculator {
     constructor() {
@@ -220,25 +218,6 @@ class BaziCalculator {
                     <div class="talisman-header">高山神社 · 秘传灵符</div>
                     <div class="talisman-body">避凶趋吉·百无禁忌</div>
                     <div style="font-size: 0.8rem; color: #f5d061;">敕令 · 庇佑 ${data.name}【${data.topic}】顺遂成功</div>
-                </div>
-
-                <!-- 沉香手串有缘请购区 (闲鱼担保版) -->
-                <div class="bracelet-purchase-card" style="margin-top: 15px; background: rgba(30, 15, 35, 0.6); border: 1.5px solid var(--gold-secondary); border-radius: 12px; padding: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);">
-                    <div class="bp-header" style="border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                        <span class="bp-title" style="font-family: var(--font-calligraphy); font-size: 1.15rem; color: var(--gold-primary); letter-spacing: 1px;">📿 有缘法器请购 · 官方担保</span>
-                        <span class="bp-tag" style="background: rgba(200,40,40,0.2); border: 1px solid var(--crimson-primary); color: #ffa7a7; font-size: 0.75rem; padding: 2px 6px; border-radius: 4px;">开光加持 · 顺丰包邮</span>
-                    </div>
-                    <div class="bp-content" style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px;">
-                        <img src="shrine_bracelet.jpg" alt="高山神社开光沉香手串" class="bp-img" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1.5px solid var(--gold-secondary); box-shadow: 0 0 10px rgba(212,175,55,0.2);">
-                        <div class="bp-details" style="flex: 1;">
-                            <h4 style="font-size: 1.05rem; color: var(--text-light); margin-bottom: 4px; font-family: var(--font-calligraphy);">高山神社开光沉香手串</h4>
-                            <p class="bp-desc" style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 6px;">选自天然老料沉香，大师开光加持，祛病消灾，助运聚财，保岁岁平安。</p>
-                            <p class="bp-price" style="font-size: 0.9rem; color: var(--text-light);">结缘价：<strong style="color: var(--gold-primary); font-size: 1.15rem;">￥99</strong> <span class="original-price" style="text-decoration: line-through; color: var(--text-muted); font-size: 0.78rem; margin-left: 6px;">￥199</span></p>
-                        </div>
-                    </div>
-                    <a href="${window.shrineXianyuLink}" target="_blank" class="btn-primary btn-gold" style="display: block; text-align: center; text-decoration: none; padding: 12px; font-size: 0.95rem; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 15px rgba(212,175,55,0.3);">
-                        🙏 前往闲鱼结缘请购 (官方安全担保)
-                    </a>
                 </div>
             </div>
         `;
